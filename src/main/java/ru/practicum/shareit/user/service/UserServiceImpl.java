@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto updateUser(UserDto updateUserDto) {
         Long updatedUserId = updateUserDto.getId();
-        if(updatedUserId == null) {
+        if (updatedUserId == null) {
             throw new ValidationException("ID пользователя не может быть пустым!");
         }
 

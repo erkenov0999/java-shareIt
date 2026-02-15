@@ -36,22 +36,6 @@ public class InMemoryUserRepository implements UserRepository {
     }
 
     @Override
-    public User findUserByEmail(String email) {
-        if (email == null) {
-            throw new ValidationException("Email не может быть пустым!");
-        }
-
-        for (int i = 0; i < users.size(); i++) {
-            User user = users.get(i);
-            if (user.getEmail().equals(email)) {
-                return user;
-            }
-        }
-
-        throw new RuntimeException("Пользователь с таким email не найден!");
-    }
-
-    @Override
     public Map<Long, User> findAllUsers() {
         log.info("Запрошен список всех пользователей, количество: {}", users.size());
         return users;
