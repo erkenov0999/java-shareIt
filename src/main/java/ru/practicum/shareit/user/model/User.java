@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User { //user
     private Long id;
 
     @NotBlank(message = "Имя пользователя не может являться пустым!")
