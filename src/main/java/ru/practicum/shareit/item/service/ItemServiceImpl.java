@@ -1,7 +1,9 @@
 package ru.practicum.shareit.item.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.mapper.ItemMapper;
 import ru.practicum.shareit.item.model.Item;
@@ -31,7 +33,7 @@ public class ItemServiceImpl implements ItemService {
         try {
             userRepository.findUserById(ownerId);
         } catch (Exception e) {
-            throw new RuntimeException("Пользователь с id " + ownerId + " не найден");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Пользователь с id " + ownerId + " не найден");
         }
 
         Item item = itemMapper.toItem(itemDto);
@@ -46,7 +48,7 @@ public class ItemServiceImpl implements ItemService {
         Item existingItem = itemRepository.findItemById(itemId);
 
         if (!existingItem.getOwnerId().equals(ownerId)) {
-            throw new RuntimeException("Только владелец может редактировать вещь!");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Пользователь с id " + ownerId + " не найден");
         }
 
         // Обновляем только переданные поля
